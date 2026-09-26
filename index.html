@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oliver Naval — IT Student & Developer Portfolio</title>
+    <meta name="description" content="Portfolio of Oliver Naval — BS Information Technology student at PUP Main, President's Lister, UI/UX Designer & Backend Developer.">
+
+    <!-- Fonts: Geist (Sans), Geist Mono, Source Serif 4, and Pixelify Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&family=Geist:wght@300;400;500;600;700&family=Pixelify+Sans:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Geist', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                        mono: ['Geist Mono', 'ui-monospace', 'monospace'],
+                        serif: ['Source Serif 4', 'Georgia', 'serif'],
+                        pixel: ['Pixelify Sans', 'Geist Mono', 'monospace'],
+                    },
+                    colors: {
+                        // bryl-minimal exact monochrome color ramp
+                        ink: 'var(--color-ink)',
+                        bg: 'var(--color-bg)',
+                        gray: {
+                            50: 'var(--color-gray-50)',
+                            100: 'var(--color-gray-100)',
+                            200: 'var(--color-gray-200)',
+                            300: 'var(--color-gray-300)',
+                            400: 'var(--color-gray-400)',
+                            500: 'var(--color-gray-500)',
+                            600: 'var(--color-gray-600)',
+                        }
+                    },
+                    boxShadow: {
+                        'bryl-card': '0 8px 22px -14px rgba(0, 0, 0, 0.25)',
+                        'bryl-card-hover': '0 18px 36px -20px rgba(0, 0, 0, 0.40)',
+                        'bryl-modal': '0 40px 90px -20px rgba(0, 0, 0, 0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* ==========================================================================
+           bryl-minimal CSS Variables & Design System Tokens
+           ========================================================================== */
+        :root {
+            --color-bg: #ffffff;
+            --color-ink: #0a0a0a;
+            --color-gray-50: #fafafa;
+            --color-gray-100: #f5f5f5;
+            --color-gray-200: #e9e9e9;
+            --color-gray-300: #d4d4d4;
+            --color-gray-400: #a3a3a3;
+            --color-gray-500: #737373;
+            --color-gray-600: #525252;
+            --halftone-dot-color: rgba(10, 10, 10, 0.85);
+            --halftone-faint: rgba(10, 10, 10, 0.12);
+        }
+
+        html.dark {
+            --color-bg: #0c0c0f;
+            --color-ink: #f4f4f5;
+            --color-gray-50: #18181b;
+            --color-gray-100: #1e1e22;
+            --color-gray-200: #2a2a30;
+            --color-gray-300: #3a3a42;
+            --color-gray-400: #8a8a92;
+            --color-gray-500: #a0a0a8;
+            --color-gray-600: #c0c0c8;
+            --halftone-dot-color: rgba(244, 244, 245, 0.42);
+            --halftone-faint: rgba(244, 244, 245, 0.15);
+        }
+
+        body {
+            background-color: var(--color-bg);
+            color: var(--color-ink);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Inverted text selection */
+        ::selection {
+            background-color: var(--color-ink);
+            color: var(--color-bg);
+        }
+
+        /* Halftone Dot Texture Motif */
+        .halftone-texture {
+            background-image: radial-gradient(var(--halftone-dot-color) 1px, transparent 1px);
+            background-size: 8px 8px;
+            background-position: 0 0;
+        }
+
+        .halftone-faint-bg {
+            background-image: radial-gradient(var(--halftone-faint) 1px, transparent 1px);
+            background-size: 9px 9px;
+            background-position: 0 0;
+        }
+
+        /* Radial edge fade mask for tasteful seasoning */
+        .halftone-masked {
+            mask-image: radial-gradient(circle at center, black 35%, transparent 75%);
+            -webkit-mask-image: radial-gradient(circle at center, black 35%, transparent 75%);
+        }
+
+        .halftone-linear-mask {
+            mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+        }
+
+        /* Card interactive lift & halftone hover */
+        .bryl-card {
+            background-color: var(--color-bg);
+            border: 1px solid var(--color-gray-200);
+            border-radius: 16px;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                        border-color 0.25s ease, 
+                        box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .bryl-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--color-ink);
+        }
+
+        /* Micro-label signature style */
+        .micro-label {
+            font-family: 'Geist Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+
+        /* Editorial link underline offset */
+        .bryl-link {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: rgba(115, 115, 115, 0.35);
+            transition: text-decoration-color 0.2s ease, opacity 0.2s ease;
+        }
+
+        .bryl-link:hover {
+            text-decoration-color: var(--color-ink);
+        }
+
+        /* Pulsing indicator */
+        @keyframes subtlePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.3; transform: scale(0.92); }
+        }
+
+        .status-pulse {
+            animation: subtlePulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Slim Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-gray-300);
+            border-radius: 9999px;
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *, ::before, ::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen antialiased selection:bg-ink selection:text-bg font-sans">
+
+    <!-- ==========================================================================
+         TOP NAVIGATION BAR (Hairline border, 90% blur, Theme Switcher)
+         ========================================================================== -->
+    <header class="sticky top-0 z-50 bg-bg/90 backdrop-blur-md border-b border-gray-200 transition-colors">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+            
+            <!-- Site Identity / Branding -->
+            <a href="#hero" class="flex items-center gap-2.5 font-mono text-xs tracking-wider uppercase group">
+                <span class="w-2 h-2 bg-ink inline-block transition-transform duration-300 group-hover:scale-125"></span>
+                <span class="font-medium text-ink">NAVAL.DEV</span>
+                <span class="text-gray-400 hidden sm:inline text-[11px]">// PORTFOLIO</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="flex items-center gap-3 sm:gap-6 micro-label text-gray-500">
+                <a href="#about" class="hover:text-ink transition-colors hidden md:inline">01 — ABOUT</a>
+                <a href="#skills" class="hover:text-ink transition-colors hidden md:inline">02 — SKILLS</a>
+                <a href="#projects" class="hover:text-ink transition-colors">03 — PROJECTS</a>
+                <a href="#experience" class="hover:text-ink transition-colors hidden sm:inline">04 — EXP</a>
+                <a href="#contact" class="hover:text-ink transition-colors">06 — CONTACT</a>
+
+                <!-- Theme Switcher Button (Light / Dark / System) -->
+                <button id="theme-toggle-btn" 
+                        class="ml-2 px-2.5 py-1 rounded-full border border-gray-300 hover:border-ink text-gray-500 hover:text-ink transition-all flex items-center gap-1.5 micro-label bg-gray-50 hover:bg-ink hover:text-bg"
+                        title="Toggle theme" 
+                        aria-label="Toggle Color Theme">
+                    <span id="theme-icon">◐</span>
+                    <span id="theme-mode-text">DARK</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Halftone Decorative Background Motif (Subtle Top Corner) -->
+    <div class="fixed top-14 right-0 w-72 h-72 halftone-texture halftone-masked pointer-events-none opacity-20 -z-10" aria-hidden="true"></div>
+
+    <!-- ==========================================================================
+         MAIN CONTENT CONTAINER (Narrow readable measure: max-w-3xl / ~48rem)
+         ========================================================================== -->
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 py-12 sm:py-20 space-y-20 sm:space-y-24">
+
+        <!-- ======================================================================
+             HERO SECTION: Name, Title, Avatar Placeholder & Status
+             ====================================================================== -->
+        <section id="hero" class="space-y-8 pt-4">
+            
+            <!-- Top Status Pill & Location -->
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gray-200 pb-4">
+                <div class="flex items-center gap-2 micro-label text-gray-500">
+                    <span class="w-2 h-2 rounded-full bg-ink status-pulse inline-block"></span>
+                    <span class="text-ink font-medium">OPEN FOR INTERNSHIPS & COLLABORATION</span>
+                </div>
+                <div class="micro-label text-gray-400">
+                    BACOOR, CAVITE, PHILIPPINES
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                
+                <!-- Hero Text Information -->
+                <div class="md:col-span-8 space-y-4">
+                    <div class="micro-label text-gray-400">
+                        BS INFORMATION TECHNOLOGY // PUP MAIN
+                    </div>
+
+                    <!-- Display Header in Pixel Font -->
+                    <h1 class="font-pixel text-4xl sm:text-5xl md:text-6xl tracking-tight leading-none text-ink uppercase">
+                        Oliver Naval
+                    </h1>
+
+                    <p class="font-serif text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed pt-1">
+                        IT Student at Polytechnic University of the Philippines. President's Lister, UI/UX designer, and backend builder crafting reliable databases, structured APIs, and minimalist interfaces.
+                    </p>
+
+                    <!-- Inverted & Micro Tags -->
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <!-- Inverted Pill: The one signature high-emphasis element -->
+                        <span class="px-2.5 py-0.5 rounded-full bg-ink text-bg micro-label font-medium">
+                            PRESIDENT'S LISTER
+                        </span>
+                        <span class="px-2.5 py-0.5 rounded-full border border-gray-300 text-gray-500 micro-label">
+                            UI/UX DESIGN
+                        </span>
+                        <span class="px-2.5 py-0.5 rounded-full border border-gray-300 text-gray-500 micro-label">
+                            BACKEND & SQL
+                        </span>
+                        <span class="px-2.5 py-0.5 rounded-full border border-gray-300 text-gray-500 micro-label">
+                            PUP MSC DESIGNER
+                        </span>
+                    </div>
+
+                    <!-- Quick Action Links -->
+                    <div class="pt-4 flex flex-wrap items-center gap-4 text-xs font-mono">
+                        <a href="#contact" class="px-4 py-2 rounded-lg bg-ink text-bg hover:opacity-90 transition-opacity font-medium tracking-wide flex items-center gap-2">
+                            <span>GET IN TOUCH</span>
+                            <span>&darr;</span>
+                        </a>
+                        <a href="mailto:olivernaval.dev@gmail.com" class="px-3.5 py-2 rounded-lg border border-gray-200 hover:border-ink text-gray-600 hover:text-ink transition-colors flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            <span>EMAIL DIRECT</span>
+                        </a>
+                        <a href="#projects" class="text-gray-500 hover:text-ink bryl-link">
+                            VIEW WORK ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ========================================================== -->
+                <!-- EDIT HERE: Profile Avatar / Photo Placeholder Box           -->
+                <!-- Replace the inner SVG with:                                 -->
+                <!-- <img src="your-photo.jpg" alt="Oliver Trapago Naval"        -->
+                <!--      class="w-full h-full object-cover rounded-xl">         -->
+                <!-- ========================================================== -->
+                <div class="md:col-span-4 flex justify-start md:justify-end">
+                    <div class="relative w-44 h-44 sm:w-48 sm:h-48 rounded-2xl border border-gray-200 p-2 bg-gray-50/50 shadow-bryl-card group overflow-hidden">
+                        
+                        <!-- Profile Image Container with Bryl-Minimal Hover Zoom -->
+                        <div class="w-full h-full rounded-xl overflow-hidden border border-gray-200 relative bg-gray-100 transition-colors group-hover:border-ink">
+                            <img src="profile.jpg" 
+                                 alt="Oliver Trapago Naval — IT Student & Developer" 
+                                 class="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
+                                 loading="eager">
+                        </div>
+
+                        <!-- Corner Inset Accent (5px inside framing border) -->
+                        <div class="absolute inset-1.5 rounded-xl border border-gray-200/50 pointer-events-none"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ======================================================================
+             SECTION 01: ABOUT & EDUCATION
+             ====================================================================== -->
+        <section id="about" class="space-y-6 pt-6">
+            
+            <!-- Section Header (Numbered em-dash style) -->
+            <div class="border-b border-gray-200 pb-3 flex items-baseline justify-between">
+                <h2 class="font-pixel text-xl sm:text-2xl uppercase tracking-wider text-ink flex items-center gap-2">
+                    <span class="text-gray-400 font-mono text-sm">01 —</span>
+                    <span>ABOUT & EDUCATION</span>
+                </h2>
+                <span class="micro-label text-gray-400">BACKGROUND</span>
+            </div>
+
+            <!-- Bio Paragraph in Source Serif 4 -->
+            <div class="space-y-4">
+                <p class="font-serif text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    I am an Information Technology student at the Polytechnic University of the Philippines (PUP Main Campus), currently maintaining President's Lister academic standing. My technical interests span both ends of product engineering: crafting human-centered UI/UX systems in Figma and engineering resilient, relational backends and database schemas using PHP, Python, and SQL.
+                </p>
+                <p class="font-serif text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Beyond coursework, I actively contribute creative and technical design work as a Graphic Designer for the PUP Microsoft Student Community. I pride myself on extreme attention to typographic nuance, clean architecture, and practical problem-solving.
+                </p>
+            </div>
+
+            <!-- Education Timeline Cards -->
+            <div class="space-y-4 pt-2">
+                <div class="micro-label text-gray-400">ACADEMIC JOURNEY</div>
+
+                <!-- Education Entry 1: PUP Main -->
+                <div class="bryl-card p-5 sm:p-6 space-y-3">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                        <div>
+                            <span class="micro-label text-gray-400 block sm:inline">COLLEGE DEGREE //</span>
+                            <h3 class="font-sans text-base sm:text-lg font-medium text-ink inline sm:ml-1">
+                                Bachelor of Science in Information Technology
+                            </h3>
+                        </div>
+                        <span class="micro-label px-2 py-0.5 rounded-full border border-gray-300 text-gray-500 w-fit">
+                            2024 — PRESENT
+                        </span>
+                    </div>
+
+                    <div class="font-mono text-xs text-gray-500">
+                        Polytechnic University of the Philippines — Main Campus (Sta. Mesa, Manila)
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2 pt-1">
+                        <span class="px-2 py-0.5 rounded-full bg-ink text-bg micro-label font-medium">
+                            ★ PRESIDENT'S LISTER
+                        </span>
+                        <span class="px-2 py-0.5 rounded-full border border-gray-200 text-gray-500 micro-label">
+                            UNDERGRADUATE
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Education Entry 2: Senior High School -->
+                <div class="bryl-card p-5 sm:p-6 space-y-3">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                        <div>
+                            <span class="micro-label text-gray-400 block sm:inline">SENIOR HIGH SCHOOL //</span>
+                            <h3 class="font-sans text-base sm:text-lg font-medium text-ink inline sm:ml-1">
+                                Science, Technology, Engineering, and Mathematics (STEM)
+                            </h3>
+                        </div>
+                        <span class="micro-label px-2 py-0.5 rounded-full border border-gray-200 text-gray-500 w-fit">
+                            2022 — 2024
+                        </span>
+                    </div>
+
+                    <div class="font-mono text-xs text-gray-500">
+                        Senior High School within Bacoor Elementary School (Bacoor, Cavite)
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-2 pt-1">
+                        <span class="px-2 py-0.5 rounded-full border border-gray-300 text-gray-500 micro-label">
+                            ★ WITH HIGH HONORS
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Leadership & Extracurriculars -->
+                <div class="p-5 rounded-2xl border border-gray-200 bg-gray-50/50 space-y-3">
+                    <div class="micro-label text-gray-400">ORGANIZATIONAL AFFILIATION & LEADERSHIP</div>
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <h4 class="font-sans text-sm font-medium text-ink">Graphic Designer</h4>
+                            <div class="font-mono text-xs text-gray-500">PUP Microsoft Student Community (PUP MSC)</div>
+                        </div>
+                        <span class="micro-label px-2 py-0.5 rounded-full border border-gray-300 text-gray-500">
+                            ACTIVE
+                        </span>
+                    </div>
+                    <p class="font-serif text-sm text-gray-500 leading-relaxed">
+                        Responsible for creating visual identity assets, marketing collateral, workshop posters, and digital graphics supporting campus technology initiatives and student workshops.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ======================================================================
+             SECTION 02: SKILLS & TECHNICAL STACK
+             ====================================================================== -->
+        <section id="skills" class="space-y-6 pt-6">
+            
+            <!-- Section Header -->
+            <div class="border-b border-gray-200 pb-3 flex items-baseline justify-between">
+                <h2 class="font-pixel text-xl sm:text-2xl uppercase tracking-wider text-ink flex items-center gap-2">
+                    <span class="text-gray-400 font-mono text-sm">02 —</span>
+                    <span>SKILLS & STACK</span>
+                </h2>
+                <span class="micro-label text-gray-400">INDEX [10]</span>
+            </div>
+
+            <p class="font-serif text-sm text-gray-500 leading-relaxed">
+                Core competencies organized by architectural layer. Evaluated through practical academic project execution and professional client work.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <!-- Category: Programming Languages -->
+                <div class="p-5 rounded-2xl border border-gray-200 space-y-3 bg-bg">
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+                        <span class="micro-label text-gray-400">01 // LANGUAGES</span>
+                        <span class="font-mono text-[10px] text-gray-400">CODE</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">Python</span>
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">C</span>
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">Java</span>
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">PHP</span>
+                        <span class="px-2.5 py-1 rounded-full bg-ink text-bg micro-label font-medium">SQL</span>
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">HTML5 / CSS3</span>
+                    </div>
+                </div>
+
+                <!-- Category: Design & Prototyping -->
+                <div class="p-5 rounded-2xl border border-gray-200 space-y-3 bg-bg">
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+                        <span class="micro-label text-gray-400">02 // DESIGN & CREATIVE</span>
+                        <span class="font-mono text-[10px] text-gray-400">UI / UX</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-full bg-ink text-bg micro-label font-medium">Figma</span>
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">Canva</span>
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">Design Systems</span>
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">Wireframing</span>
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">Video Editing</span>
+                    </div>
+                </div>
+
+                <!-- Category: Tools & Environments -->
+                <div class="p-5 rounded-2xl border border-gray-200 space-y-3 bg-bg">
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+                        <span class="micro-label text-gray-400">03 // TOOLS & ENVIRONMENTS</span>
+                        <span class="font-mono text-[10px] text-gray-400">DEV</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">VS Code</span>
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">Git & GitHub</span>
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">Microsoft Office</span>
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">XAMPP / Apache</span>
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">phpMyAdmin</span>
+                    </div>
+                </div>
+
+                <!-- Category: Systems & Networking -->
+                <div class="p-5 rounded-2xl border border-gray-200 space-y-3 bg-bg">
+                    <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+                        <span class="micro-label text-gray-400">04 // SYSTEMS & ARCHITECTURE</span>
+                        <span class="font-mono text-[10px] text-gray-400">INFRA</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">Database Admin</span>
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">Cisco Packet Tracer</span>
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">Network Topologies</span>
+                        <span class="px-2.5 py-1 rounded-full border border-gray-300 text-ink micro-label font-medium hover:border-ink transition-colors">TCP/IP & Subnetting</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ======================================================================
+             SECTION 03: FEATURED PROJECTS
+             ====================================================================== -->
+        <section id="projects" class="space-y-6 pt-6">
+            
+            <!-- Section Header -->
+            <div class="border-b border-gray-200 pb-3 flex items-baseline justify-between">
+                <h2 class="font-pixel text-xl sm:text-2xl uppercase tracking-wider text-ink flex items-center gap-2">
+                    <span class="text-gray-400 font-mono text-sm">03 —</span>
+                    <span>FEATURED PROJECTS</span>
+                </h2>
+                <span class="micro-label text-gray-400">INDEX [3]</span>
+            </div>
+
+            <!-- Project Cards Stack -->
+            <div class="space-y-6">
+
+                <!-- ============================================================== -->
+                <!-- PROJECT CARD 01: PUPwesto                                      -->
+                <!-- ============================================================== -->
+                <article class="bryl-card p-6 sm:p-7 space-y-5 shadow-bryl-card">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-gray-100 pb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="micro-label px-2 py-0.5 rounded-full bg-ink text-bg font-medium">PROJECT 01</span>
+                            <span class="micro-label text-gray-400">// UI/UX DESIGN & PROTOTYPING</span>
+                        </div>
+                        <span class="micro-label text-gray-400">FIGMA SPEC</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
+                        <div class="md:col-span-7 space-y-2">
+                            <h3 class="font-sans text-xl sm:text-2xl font-semibold text-ink tracking-tight">
+                                PUPwesto — Room Reservation App Prototype
+                            </h3>
+                            <p class="font-serif text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                                A mobile application prototype engineered to streamline classroom, laboratory, and study space reservations across the PUP campus. Crafted with intuitive user flows, real-time availability states, interactive booking modals, and accessibility-first responsive wireframes.
+                            </p>
+                        </div>
+
+                        <!-- Project Thumbnail: Real PUPwesto Prototype Mockup (Clickable) -->
+                        <a href="https://www.figma.com/proto/gqwc5tSAWlLeSLLpxWD74U/High-Fidelity-Wireframe--Group-4-?node-id=273-3882&p=f&viewport=-974%2C-413%2C0.58&t=PGejCS7mX9qq849s-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=273%3A3882&page-id=251%3A2134" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="md:col-span-5 relative aspect-video rounded-xl overflow-hidden border border-gray-200 group/preview bg-gray-100 transition-all hover:border-ink shadow-sm block" 
+                           title="Open PUPwesto High-Fidelity Prototype on Figma">
+                            <img src="pupwesto-preview.png" 
+                                 alt="PUPwesto Prototype Screen Mockup" 
+                                 class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover/preview:scale-105"
+                                 loading="lazy">
+                            <!-- Overlay Badge -->
+                            <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-bg/90 backdrop-blur-sm border border-gray-200 text-ink micro-label flex items-center gap-1 group-hover/preview:bg-ink group-hover/preview:text-bg transition-colors">
+                                <span>FIGMA PROTOTYPE</span>
+                                <span>↗</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Tech Stack Tags & Action Links -->
+                    <div class="pt-2 flex flex-wrap items-center justify-between gap-4 border-t border-gray-100">
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px] text-gray-500">
+                            <span class="px-2 py-0.5 rounded bg-gray-100 text-ink">Figma</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 text-ink">UI/UX Research</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 text-ink">Wireframing</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 text-ink">Component Library</span>
+                        </div>
+
+                        <div class="flex items-center gap-3 font-mono text-xs">
+                            <!-- EDIT HERE: Update link href with your actual Figma or Behance link -->
+                            <a href="https://www.figma.com/proto/gqwc5tSAWlLeSLLpxWD74U/High-Fidelity-Wireframe--Group-4-?node-id=273-3882&p=f&viewport=-974%2C-413%2C0.58&t=PGejCS7mX9qq849s-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=273%3A3882&page-id=251%3A2134" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg border border-gray-300 hover:border-ink hover:bg-ink hover:text-bg text-ink transition-all flex items-center gap-1">
+                                <span>FIGMA PROTOTYPE</span>
+                                <span>↗</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+
+                <!-- ============================================================== -->
+                <!-- PROJECT CARD 02: PhilHealth Membership Registration System     -->
+                <!-- ============================================================== -->
+                <article class="bryl-card p-6 sm:p-7 space-y-5 shadow-bryl-card">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-gray-100 pb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="micro-label px-2 py-0.5 rounded-full bg-ink text-bg font-medium">PROJECT 02</span>
+                            <span class="micro-label text-gray-400">// BACKEND & DATABASE ADMIN</span>
+                        </div>
+                        <span class="micro-label text-gray-400">FULL-STACK CRUD</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
+                        <div class="md:col-span-7 space-y-2">
+                            <h3 class="font-sans text-xl sm:text-2xl font-semibold text-ink tracking-tight">
+                                PhilHealth Membership Registration System
+                            </h3>
+                            <p class="font-serif text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                                A web-based registration and records management portal handling citizen member intake, relational record validation, member ID generation, and administrative querying. Engineered with robust SQL data normalization and sanitized server-side processing.
+                            </p>
+                        </div>
+
+                        <!-- Project Thumbnail: Real PhilHealth Registration Form UI Mockup (Clickable) -->
+                        <a href="https://github.com/olivernavaldev-alt/philHealth-membership-registration-system" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="md:col-span-5 relative aspect-video rounded-xl overflow-hidden border border-gray-200 group/preview bg-gray-100 transition-all hover:border-ink shadow-sm block" 
+                           title="Open PhilHealth Membership Registration System on GitHub">
+                            <img src="philhealth-preview.png" 
+                                 alt="PhilHealth Membership Registration System Interface & Database Schema" 
+                                 class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover/preview:scale-105"
+                                 loading="lazy">
+                            <!-- Overlay Badge -->
+                            <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-bg/90 backdrop-blur-sm border border-gray-200 text-ink micro-label flex items-center gap-1 group-hover/preview:bg-ink group-hover/preview:text-bg transition-colors">
+                                <span>GITHUB REPO</span>
+                                <span>↗</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Tech Stack Tags & Action Links -->
+                    <div class="pt-2 flex flex-wrap items-center justify-between gap-4 border-t border-gray-100">
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px] text-gray-500">
+                            <span class="px-2 py-0.5 rounded bg-gray-100 text-ink">PHP</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 text-ink">MySQL</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 text-ink">HTML/CSS</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 text-ink">CRUD Architecture</span>
+                        </div>
+
+                        <div class="flex items-center gap-3 font-mono text-xs">
+                            <!-- GitHub Repository Link -->
+                            <a href="https://github.com/olivernavaldev-alt/philHealth-membership-registration-system" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg border border-gray-300 hover:border-ink hover:bg-ink hover:text-bg text-ink transition-all flex items-center gap-1">
+                                <span>GITHUB REPO</span>
+                                <span>↗</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+
+                <!-- ============================================================== -->
+                <!-- PROJECT CARD 03: Enterprise Library Network Architecture       -->
+                <!-- ============================================================== -->
+                <article class="bryl-card p-6 sm:p-7 space-y-5 shadow-bryl-card">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-gray-100 pb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="micro-label px-2 py-0.5 rounded-full bg-ink text-bg font-medium">PROJECT 03</span>
+                            <span class="micro-label text-gray-400">// SYSTEMS & NETWORKING</span>
+                        </div>
+                        <span class="micro-label text-gray-400">INFRA DESIGN</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
+                        <div class="md:col-span-7 space-y-2">
+                            <h3 class="font-sans text-xl sm:text-2xl font-semibold text-ink tracking-tight">
+                                LibEase — Enterprise Library Network Architecture
+                            </h3>
+                            <p class="font-serif text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                                A comprehensive multi-floor campus library network infrastructure design modeled in Cisco Packet Tracer. Configured VLAN segmentation, DHCP pool routing, access control lists (ACLs), Wi-Fi coverage maps, and redundant gateway switching protocols.
+                            </p>
+                        </div>
+
+                        <!-- Project Thumbnail: Real LibEase Network Topology & Floorplan Mockup (Clickable) -->
+                        <a href="https://github.com/olivernavaldev-alt/enterprise-library-network-architecture" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="md:col-span-5 relative aspect-video rounded-xl overflow-hidden border border-gray-200 group/preview bg-gray-100 transition-all hover:border-ink shadow-sm block" 
+                           title="Open Enterprise Library Network Architecture on GitHub">
+                            <img src="libease-preview.png" 
+                                 alt="LibEase Library Floorplan and Cisco Network Topology" 
+                                 class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover/preview:scale-105"
+                                 loading="lazy">
+                            <!-- Overlay Badge -->
+                            <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-bg/90 backdrop-blur-sm border border-gray-200 text-ink micro-label flex items-center gap-1 group-hover/preview:bg-ink group-hover/preview:text-bg transition-colors">
+                                <span>GITHUB REPO</span>
+                                <span>↗</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Tech Stack Tags & Action Links -->
+                    <div class="pt-2 flex flex-wrap items-center justify-between gap-4 border-t border-gray-100">
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px] text-gray-500">
+                            <span class="px-2 py-0.5 rounded bg-gray-100 text-ink">Cisco Networking</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 text-ink">VLAN / Subnetting</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 text-ink">Routing Protocols</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 text-ink">Packet Tracer</span>
+                        </div>
+
+                        <div class="flex items-center gap-3 font-mono text-xs">
+                            <!-- GitHub Repository Link -->
+                            <a href="https://github.com/olivernavaldev-alt/enterprise-library-network-architecture" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg border border-gray-300 hover:border-ink hover:bg-ink hover:text-bg text-ink transition-all flex items-center gap-1">
+                                <span>GITHUB REPO</span>
+                                <span>↗</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ============================================================== -->
+                <!-- EDIT HERE: Copy this entire block below to add a 4th project   -->
+                <!-- ============================================================== -->
+                <!--
+                <article class="bryl-card p-6 sm:p-7 space-y-5 shadow-bryl-card">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-gray-100 pb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="micro-label px-2 py-0.5 rounded-full bg-ink text-bg font-medium">PROJECT 04</span>
+                            <span class="micro-label text-gray-400">// YOUR ROLE</span>
+                        </div>
+                        <span class="micro-label text-gray-400">TECH STACK</span>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="font-sans text-xl sm:text-2xl font-semibold text-ink tracking-tight">Project Title</h3>
+                        <p class="font-serif text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                            Description of project goals, features, and key contributions.
+                        </p>
+                    </div>
+                    <div class="pt-2 flex flex-wrap items-center justify-between gap-4 border-t border-gray-100">
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px] text-gray-500">
+                            <span class="px-2 py-0.5 rounded bg-gray-100 text-ink">Tech 1</span>
+                            <span class="px-2 py-0.5 rounded bg-gray-100 text-ink">Tech 2</span>
+                        </div>
+                        <a href="#" class="px-3 py-1.5 rounded-lg border border-gray-300 hover:border-ink text-ink transition-colors flex items-center gap-1 font-mono text-xs">
+                            <span>VIEW</span>
+                            <span>↗</span>
+                        </a>
+                    </div>
+                </article>
+                -->
+
+            </div>
+        </section>
+
+
+        <!-- ======================================================================
+             SECTION 04: WORK EXPERIENCE
+             ====================================================================== -->
+        <section id="experience" class="space-y-6 pt-6">
+            
+            <!-- Section Header -->
+            <div class="border-b border-gray-200 pb-3 flex items-baseline justify-between">
+                <h2 class="font-pixel text-xl sm:text-2xl uppercase tracking-wider text-ink flex items-center gap-2">
+                    <span class="text-gray-400 font-mono text-sm">04 —</span>
+                    <span>WORK EXPERIENCE</span>
+                </h2>
+                <span class="micro-label text-gray-400">TIMELINE</span>
+            </div>
+
+            <!-- Experience Timeline List (Dividers are 1px hairlines) -->
+            <div class="space-y-6">
+
+                <!-- Experience Item 1: Freelance Graphic Designer & Video Editor -->
+                <div class="relative pl-6 border-l border-gray-200 space-y-2">
+                    <span class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full border-2 border-bg bg-ink"></span>
+                    
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                        <h3 class="font-sans text-base sm:text-lg font-medium text-ink">
+                            Freelance Graphic Designer & Video Editor
+                        </h3>
+                        <span class="micro-label px-2.5 py-0.5 rounded-full border border-gray-300 text-gray-500 w-fit">
+                            MAR 2025 — OCT 2025
+                        </span>
+                    </div>
+
+                    <div class="font-mono text-xs text-gray-500">
+                        E-Commerce & Direct-to-Consumer (D2C) Brands // Remote
+                    </div>
+
+                    <ul class="font-serif text-sm text-gray-600 dark:text-gray-300 space-y-1.5 list-disc list-inside leading-relaxed pt-1">
+                        <li>Designed high-converting promotional banners, social media ad creatives, and packaging mockups for digital storefronts.</li>
+                        <li>Edited short-form video reels and product explainers with precise pacing, kinetic typography, and audio synchronization.</li>
+                        <li>Maintained brand consistency across multi-channel digital campaigns.</li>
+                    </ul>
+                </div>
+
+                <!-- Experience Item 2: Supervalue Inc. -->
+                <div class="relative pl-6 border-l border-gray-200 space-y-2">
+                    <span class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full border-2 border-bg bg-gray-400"></span>
+                    
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                        <h3 class="font-sans text-base sm:text-lg font-medium text-ink">
+                            Logistics TP Scanner & Selling Clerk
+                        </h3>
+                        <span class="micro-label px-2.5 py-0.5 rounded-full border border-gray-200 text-gray-500 w-fit">
+                            JUL 2024 — SEP 2024
+                        </span>
+                    </div>
+
+                    <div class="font-mono text-xs text-gray-500">
+                        Supervalue Inc. (SM Supermarket Supply Chain)
+                    </div>
+
+                    <ul class="font-serif text-sm text-gray-600 dark:text-gray-300 space-y-1.5 list-disc list-inside leading-relaxed pt-1">
+                        <li>Operated inventory barcode scanning terminals (TP Scanners) for real-time warehouse stock tracking and dispatch verification.</li>
+                        <li>Reconciled incoming delivery manifests with physical floor inventory to prevent stock discrepancy and loss.</li>
+                        <li>Coordinated with floor supervisors to expedite priority supply shelf placement.</li>
+                    </ul>
+                </div>
+
+                <!-- Experience Item 3: Health Index Clinic -->
+                <div class="relative pl-6 border-l border-gray-200 space-y-2">
+                    <span class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full border-2 border-bg bg-gray-400"></span>
+                    
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                        <h3 class="font-sans text-base sm:text-lg font-medium text-ink">
+                            Receptionist & Data Encoder
+                        </h3>
+                        <span class="micro-label px-2.5 py-0.5 rounded-full border border-gray-200 text-gray-500 w-fit">
+                            APR 2024
+                        </span>
+                    </div>
+
+                    <div class="font-mono text-xs text-gray-500">
+                        Health Index Primary Care Clinic
+                    </div>
+
+                    <ul class="font-serif text-sm text-gray-600 dark:text-gray-300 space-y-1.5 list-disc list-inside leading-relaxed pt-1">
+                        <li>Digitized confidential patient consultation records and laboratory results into clinical electronic database systems.</li>
+                        <li>Managed daily patient intake appointments, billing receipts, and triage coordination with clinic medical staff.</li>
+                        <li>Maintained strict adherence to patient data privacy and accurate clinical record keeping.</li>
+                    </ul>
+                </div>
+
+                <!-- ============================================================== -->
+                <!-- EDIT HERE: Copy this block to add a new work experience entry  -->
+                <!-- ============================================================== -->
+                <!--
+                <div class="relative pl-6 border-l border-gray-200 space-y-2">
+                    <span class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full border-2 border-bg bg-gray-400"></span>
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                        <h3 class="font-sans text-base sm:text-lg font-medium text-ink">Job Title</h3>
+                        <span class="micro-label px-2.5 py-0.5 rounded-full border border-gray-200 text-gray-500 w-fit">MONTH YEAR — MONTH YEAR</span>
+                    </div>
+                    <div class="font-mono text-xs text-gray-500">Company Name // Location</div>
+                    <ul class="font-serif text-sm text-gray-600 dark:text-gray-300 space-y-1.5 list-disc list-inside leading-relaxed pt-1">
+                        <li>Key responsibility or achievement statement.</li>
+                    </ul>
+                </div>
+                -->
+
+            </div>
+        </section>
+
+
+        <!-- ======================================================================
+             SECTION 05: CERTIFICATIONS & CREDENTIALS (Template Section)
+             ====================================================================== -->
+        <section id="certifications" class="space-y-6 pt-6">
+            
+            <!-- Section Header -->
+            <div class="border-b border-gray-200 pb-3 flex items-baseline justify-between">
+                <h2 class="font-pixel text-xl sm:text-2xl uppercase tracking-wider text-ink flex items-center gap-2">
+                    <span class="text-gray-400 font-mono text-sm">05 —</span>
+                    <span>CERTIFICATIONS</span>
+                </h2>
+                <span class="micro-label text-gray-400">CREDENTIALS</span>
+            </div>
+
+            <p class="font-serif text-sm text-gray-500 leading-relaxed">
+                Professional industry certificates, technical badges, and continuous learning milestones.
+            </p>
+
+            <!-- 2 Certification Placeholder Cards (Ready for future IT certifications) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <!-- ========================================================== -->
+                <!-- EDIT HERE: Certification Placeholder Card 01               -->
+                <!-- Edit the title, issuer, credential ID, and status below   -->
+                <!-- ========================================================== -->
+                <div class="bryl-card p-5 space-y-3 shadow-bryl-card">
+                    <div class="flex items-center justify-between">
+                        <span class="micro-label px-2 py-0.5 rounded-full bg-ink text-bg font-medium">IN PROGRESS</span>
+                        <span class="micro-label text-gray-400">TARGET 2026</span>
+                    </div>
+
+                    <div class="space-y-1">
+                        <h3 class="font-sans text-base font-medium text-ink">
+                            Cisco Certified Network Associate (CCNA)
+                        </h3>
+                        <div class="font-mono text-xs text-gray-500">
+                            Issuer: Cisco Systems // Networking Fundamentals
+                        </div>
+                    </div>
+
+                    <p class="font-serif text-xs text-gray-500 leading-relaxed">
+                        Covers IP connectivity, IP services, security fundamentals, network access, and network automation essentials.
+                    </p>
+
+                    <div class="pt-2 border-t border-gray-100 flex items-center justify-between micro-label text-gray-400">
+                        <span>CREDENTIAL ID: [PENDING]</span>
+                        <!-- EDIT HERE: Link to digital badge once earned -->
+                        <span class="text-gray-400">VERIFICATION ↗</span>
+                    </div>
+                </div>
+
+                <!-- ========================================================== -->
+                <!-- EDIT HERE: Certification Placeholder Card 02               -->
+                <!-- Edit the title, issuer, credential ID, and status below   -->
+                <!-- ========================================================== -->
+                <div class="bryl-card p-5 space-y-3 shadow-bryl-card">
+                    <div class="flex items-center justify-between">
+                        <span class="micro-label px-2 py-0.5 rounded-full border border-gray-300 text-gray-500">PLANNED</span>
+                        <span class="micro-label text-gray-400">TARGET 2026</span>
+                    </div>
+
+                    <div class="space-y-1">
+                        <h3 class="font-sans text-base font-medium text-ink">
+                            AWS Certified Cloud Practitioner (CLF-C02)
+                        </h3>
+                        <div class="font-mono text-xs text-gray-500">
+                            Issuer: Amazon Web Services (AWS) // Cloud Foundations
+                        </div>
+                    </div>
+
+                    <p class="font-serif text-xs text-gray-500 leading-relaxed">
+                        Validates overall understanding of AWS Cloud concepts, cloud security, architecture, pricing models, and core services.
+                    </p>
+
+                    <div class="pt-2 border-t border-gray-100 flex items-center justify-between micro-label text-gray-400">
+                        <span>CREDENTIAL ID: [PENDING]</span>
+                        <!-- EDIT HERE: Link to digital badge once earned -->
+                        <span class="text-gray-400">VERIFICATION ↗</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ======================================================================
+             SECTION 06: CONTACT & GET IN TOUCH
+             ====================================================================== -->
+        <section id="contact" class="space-y-6 pt-6">
+            
+            <!-- Section Header -->
+            <div class="border-b border-gray-200 pb-3 flex items-baseline justify-between">
+                <h2 class="font-pixel text-xl sm:text-2xl uppercase tracking-wider text-ink flex items-center gap-2">
+                    <span class="text-gray-400 font-mono text-sm">06 —</span>
+                    <span>CONTACT & CONNECT</span>
+                </h2>
+                <span class="micro-label text-gray-400">INBOX</span>
+            </div>
+
+            <div class="bryl-card p-6 sm:p-8 space-y-6 shadow-bryl-card bg-gray-50/40">
+                
+                <div class="space-y-2">
+                    <h3 class="font-sans text-xl font-medium text-ink">
+                        Let's build something exceptional together.
+                    </h3>
+                    <p class="font-serif text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                        I am currently seeking internship roles, freelance UI/UX and backend projects, and collaborative opportunities with tech communities. Feel free to reach out directly.
+                    </p>
+                </div>
+
+                <!-- Contact Channels Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-xs pt-2">
+                    
+                    <!-- Email Card with 1-Click Copy -->
+                    <div class="p-4 rounded-xl border border-gray-200 bg-bg space-y-2">
+                        <div class="flex items-center justify-between text-gray-400 micro-label">
+                            <span>01 // EMAIL</span>
+                            <span class="text-green-600 dark:text-green-400">ACTIVE</span>
+                        </div>
+                        <div class="font-medium text-ink break-all" id="email-text">
+                            olivernaval.dev@gmail.com
+                        </div>
+                        <div class="flex items-center gap-2 pt-1">
+                            <a href="mailto:olivernaval.dev@gmail.com" class="px-2.5 py-1 rounded border border-gray-300 hover:border-ink text-ink transition-colors">
+                                Send Mail ↗
+                            </a>
+                            <button onclick="copyToClipboard('olivernaval.dev@gmail.com', this)" class="px-2.5 py-1 rounded bg-gray-100 hover:bg-ink hover:text-bg text-gray-600 transition-colors">
+                                Copy Email
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Phone Card with 1-Click Copy -->
+                    <div class="p-4 rounded-xl border border-gray-200 bg-bg space-y-2">
+                        <div class="flex items-center justify-between text-gray-400 micro-label">
+                            <span>02 // MOBILE PHONE</span>
+                            <span>SMS / CALL</span>
+                        </div>
+                        <div class="font-medium text-ink" id="phone-text">
+                            +63 969 431 8236
+                        </div>
+                        <div class="flex items-center gap-2 pt-1">
+                            <a href="tel:+639694318236" class="px-2.5 py-1 rounded border border-gray-300 hover:border-ink text-ink transition-colors">
+                                Call / SMS ↗
+                            </a>
+                            <button onclick="copyToClipboard('+639694318236', this)" class="px-2.5 py-1 rounded bg-gray-100 hover:bg-ink hover:text-bg text-gray-600 transition-colors">
+                                Copy Number
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Location Card -->
+                    <div class="p-4 rounded-xl border border-gray-200 bg-bg space-y-2">
+                        <div class="flex items-center justify-between text-gray-400 micro-label">
+                            <span>03 // LOCATION</span>
+                            <span>PHILIPPINES</span>
+                        </div>
+                        <div class="font-medium text-ink">
+                            Bacoor, Cavite, Philippines
+                        </div>
+                        <p class="font-serif text-[11px] text-gray-500">
+                            Available for on-site (Metro Manila / Cavite) and remote arrangements.
+                        </p>
+                    </div>
+
+                    <!-- Social / Code Repositories -->
+                    <div class="p-4 rounded-xl border border-gray-200 bg-bg space-y-2">
+                        <div class="flex items-center justify-between text-gray-400 micro-label">
+                            <span>04 // PROFILES</span>
+                            <span>EXTERNAL</span>
+                        </div>
+                        <!-- EDIT HERE: Add your GitHub / LinkedIn / Behance URLs -->
+                        <div class="flex flex-wrap gap-2 pt-1">
+                            <a href="https://github.com/olivernavaldev-alt" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded border border-gray-300 hover:border-ink hover:bg-ink hover:text-bg text-ink transition-colors">
+                                GitHub ↗
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded border border-gray-300 hover:border-ink text-ink transition-colors">
+                                LinkedIn ↗
+                            </a>
+                            <a href="https://figma.com" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded border border-gray-300 hover:border-ink text-ink transition-colors">
+                                Figma ↗
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- ==========================================================================
+         FOOTER: Minimalist Technical Spec Stamp & Colophon
+         ========================================================================== -->
+    <footer class="border-t border-gray-200 py-12 mt-20 transition-colors">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4 font-mono text-xs text-gray-500">
+            <div class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-ink rounded-full"></span>
+                <span>OLIVER NAVAL // PORTFOLIO 2026</span>
+            </div>
+            <div class="micro-label text-gray-400">
+                BRYL-MINIMAL SPEC // GEIST MONO
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- ==========================================================================
+         INTERACTIVE JAVASCRIPT: Theme Switcher & Clipboard Helper
+         ========================================================================== -->
+    <script>
+        // ----------------------------------------------------------------------
+        // 1. Theme Management (Light / Dark / System sync + LocalStorage)
+        // ----------------------------------------------------------------------
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        const themeModeText = document.getElementById('theme-mode-text');
+        const themeIcon = document.getElementById('theme-icon');
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                themeModeText.textContent = 'LIGHT';
+                themeIcon.textContent = '☼';
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeModeText.textContent = 'DARK';
+                themeIcon.textContent = '☾';
+            }
+        }
+
+        // Initialize Theme from localStorage or OS Preference
+        const storedTheme = localStorage.getItem('bryl-theme');
+        if (storedTheme === 'dark' || (!storedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            applyTheme(true);
+        } else {
+            applyTheme(false);
+        }
+
+        // Listen for user click on toggle
+        themeToggleBtn.addEventListener('click', () => {
+            const isCurrentlyDark = document.documentElement.classList.contains('dark');
+            const newIsDark = !isCurrentlyDark;
+            applyTheme(newIsDark);
+            localStorage.setItem('bryl-theme', newIsDark ? 'dark' : 'light');
+        });
+
+        // Listen for OS system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('bryl-theme')) {
+                applyTheme(e.matches);
+            }
+        });
+
+        // ----------------------------------------------------------------------
+        // 2. Clipboard Helper Function
+        // ----------------------------------------------------------------------
+        function copyToClipboard(text, buttonElement) {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = buttonElement.textContent;
+                buttonElement.textContent = 'Copied!';
+                buttonElement.classList.add('bg-ink', 'text-bg');
+                setTimeout(() => {
+                    buttonElement.textContent = originalText;
+                    buttonElement.classList.remove('bg-ink', 'text-bg');
+                }, 1800);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
