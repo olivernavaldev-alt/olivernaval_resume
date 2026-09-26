@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01 — BRYL-MINIMAL // PORTFOLIO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Geist:wght@100..900&family=Pixelify+Sans:wght@400..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Geist', 'Inter', 'sans-serif'],
+                        mono: ['Geist Mono', 'Space Mono', 'monospace'],
+                        serif: ['Source Serif 4', 'serif'],
+                        pixel: ['Pixelify Sans', 'monospace']
+                    },
+                    colors: {
+                        trueblack: '#000000',
+                        truewhite: '#ffffff',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* bryl-minimal Halftone Dot Pattern Motif */
+        .halftone-bg {
+            background-image: radial-gradient(rgba(0, 0, 0, 0.15) 1px, transparent 0);
+            background-size: 8px 8px;
+            background-position: -19px -19px;
+        }
+
+        .dark .halftone-bg {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.2) 1px, transparent 0);
+        }
+
+        .halftone-card-hover {
+            position: relative;
+        }
+
+        .halftone-card-hover::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(currentColor 1px, transparent 0);
+            background-size: 6px 6px;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+            pointer-events: none;
+            border-radius: inherit;
+        }
+
+        .halftone-card-hover:hover::before {
+            opacity: 0.08;
+        }
+
+        /* Restrained Fade-up Motion */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .stagger-1 { animation-delay: 0.05s; }
+        .stagger-2 { animation-delay: 0.1s; }
+        .stagger-3 { animation-delay: 0.15s; }
+        .stagger-4 { animation-delay: 0.2s; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+    </style>
+</head>
+<body class="bg-truewhite text-trueblack dark:bg-trueblack dark:text-truewhite min-h-screen font-sans selection:bg-trueblack selection:text-truewhite dark:selection:bg-truewhite dark:selection:text-trueblack transition-colors duration-200">
+
+    <header class="sticky top-0 z-50 bg-truewhite/90 dark:bg-trueblack/90 backdrop-blur-md border-b border-black/10 dark:border-white/10 transition-colors">
+        <div class="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between">
+            <a href="#" class="font-mono text-xs tracking-widest uppercase flex items-center gap-2 group">
+                <span class="w-2 h-2 bg-trueblack dark:bg-truewhite inline-block transition-transform group-hover:scale-125"></span>
+                <span>BRYL.STUDIO</span>
+            </a>
+            
+            <div class="flex items-center gap-6 text-xs font-mono">
+                <a href="#projects" class="hover:underline underline-offset-4 decoration-1">01 — WORK</a>
+                <a href="#about" class="hover:underline underline-offset-4 decoration-1">02 — SPEC</a>
+                
+                <!-- Dark Mode Toggle Chip -->
+                <button id="theme-toggle" class="border border-black/20 dark:border-white/20 px-2.5 py-1 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                    <span id="theme-text" class="uppercase text-[10px] tracking-wider">DARK</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12 md:py-20 space-y-20">
+
+        <section class="space-y-6 animate-fade-up">
+            <div class="flex items-center gap-3">
+                <span class="font-mono text-xs uppercase tracking-widest px-2 py-0.5 border border-black/20 dark:border-white/20 rounded-sm">00 — SPEC</span>
+                <span class="font-mono text-[10px] uppercase text-black/50 dark:text-white/50 tracking-widest">DESIGN LANGUAGE SYSTEM</span>
+            </div>
+            
+            <h1 class="font-pixel text-4xl sm:text-6xl tracking-tight leading-none uppercase">
+                MONOCHROME. EDITORIAL. HIGH DENSITY.
+            </h1>
+            
+            <p class="font-serif text-lg sm:text-xl text-black/80 dark:text-white/80 max-w-2xl leading-relaxed">
+                A minimal, typography-driven architectural system. Strict monochrome palette, halftone dot textures, tiny uppercase mono labels, soft radius enclosures, and tight technical hierarchy.
+            </p>
+
+            <div class="pt-2 flex flex-wrap gap-3 font-mono text-[11px] uppercase tracking-wider">
+                <span class="px-3 py-1 bg-black text-white dark:bg-white dark:text-black rounded-full">GEIST MONO</span>
+                <span class="px-3 py-1 border border-black/15 dark:border-white/15 rounded-full">HALFTONE MOTIF</span>
+                <span class="px-3 py-1 border border-black/15 dark:border-white/15 rounded-full">NO ACCENT COLOR</span>
+            </div>
+        </section>
+
+        <section id="projects" class="space-y-8 pt-8">
+            <div class="border-t border-black/10 dark:border-white/10 pt-6 flex justify-between items-baseline">
+                <h2 class="font-mono text-xs tracking-widest uppercase flex items-center gap-2">
+                    <span class="font-bold">01 —</span>
+                    <span>SELECTED PROJECTS</span>
+                </h2>
+                <span class="font-mono text-[10px] text-black/40 dark:text-white/40 uppercase">INDEX [4]</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Project Card 1 -->
+                <article class="group halftone-card-hover border border-black/10 dark:border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-black dark:hover:border-white transition-all duration-200 animate-fade-up stagger-1 bg-white dark:bg-trueblack">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between font-mono text-[10px] tracking-widest uppercase">
+                            <span class="text-black/50 dark:text-white/50">ARCH — 01</span>
+                            <span class="px-2 py-0.5 border border-black/10 dark:border-white/10 rounded-full">2026</span>
+                        </div>
+                        
+                        <!-- Halftone Texture Preview Banner -->
+                        <div class="w-full h-32 rounded-lg border border-black/10 dark:border-white/10 halftone-bg flex items-center justify-center p-4">
+                            <span class="font-pixel text-xl tracking-wide uppercase group-hover:scale-105 transition-transform">SYSTEM.UI</span>
+                        </div>
+
+                        <h3 class="font-sans text-xl font-medium tracking-tight">K9 Operating Interface</h3>
+                        <p class="font-serif text-sm text-black/70 dark:text-white/70 leading-relaxed">
+                            A high-density desktop environment built for monitoring cloud workloads with zero decorative color noise.
+                        </p>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-black/5 dark:border-white/5 flex items-center justify-between font-mono text-[11px]">
+                        <span class="text-black/50 dark:text-white/50">TAILWIND / RUST</span>
+                        <a href="#" class="group-hover:translate-x-1 transition-transform flex items-center gap-1 font-bold">
+                            VIEW <span>&rarr;</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project Card 2 -->
+                <article class="group halftone-card-hover border border-black/10 dark:border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-black dark:hover:border-white transition-all duration-200 animate-fade-up stagger-2 bg-white dark:bg-trueblack">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between font-mono text-[10px] tracking-widest uppercase">
+                            <span class="text-black/50 dark:text-white/50">ARCH — 02</span>
+                            <span class="px-2 py-0.5 border border-black/10 dark:border-white/10 rounded-full">2025</span>
+                        </div>
+
+                        <!-- Halftone Texture Preview Banner -->
+                        <div class="w-full h-32 rounded-lg border border-black/10 dark:border-white/10 halftone-bg flex items-center justify-center p-4">
+                            <span class="font-mono text-sm tracking-widest uppercase group-hover:scale-105 transition-transform">[SYNTH_ENGINE]</span>
+                        </div>
+
+                        <h3 class="font-sans text-xl font-medium tracking-tight">Geist Audio Synthesizer</h3>
+                        <p class="font-serif text-sm text-black/70 dark:text-white/70 leading-relaxed">
+                            WebAudio browser workstation utilizing geometric grid parameters and tactile monochrome sliders.
+                        </p>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-black/5 dark:border-white/5 flex items-center justify-between font-mono text-[11px]">
+                        <span class="text-black/50 dark:text-white/50">WEB AUDIO / TS</span>
+                        <a href="#" class="group-hover:translate-x-1 transition-transform flex items-center gap-1 font-bold">
+                            VIEW <span>&rarr;</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project Card 3 -->
+                <article class="group halftone-card-hover border border-black/10 dark:border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-black dark:hover:border-white transition-all duration-200 animate-fade-up stagger-3 bg-white dark:bg-trueblack">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between font-mono text-[10px] tracking-widest uppercase">
+                            <span class="text-black/50 dark:text-white/50">ARCH — 03</span>
+                            <span class="px-2 py-0.5 border border-black/10 dark:border-white/10 rounded-full">2025</span>
+                        </div>
+
+                        <!-- Halftone Texture Preview Banner -->
+                        <div class="w-full h-32 rounded-lg border border-black/10 dark:border-white/10 halftone-bg flex items-center justify-center p-4">
+                            <div class="text-center">
+                                <span class="font-serif text-2xl italic block">Zine Spec</span>
+                                <span class="font-mono text-[9px] uppercase tracking-widest">VOL. 04</span>
+                            </div>
+                        </div>
+
+                        <h3 class="font-sans text-xl font-medium tracking-tight">Editorial Typography Engine</h3>
+                        <p class="font-serif text-sm text-black/70 dark:text-white/70 leading-relaxed">
+                            Open-source layout engine designed for long-form publishing with precise grid constraints.
+                        </p>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-black/5 dark:border-white/5 flex items-center justify-between font-mono text-[11px]">
+                        <span class="text-black/50 dark:text-white/50">TYPOGRAPHY / CANVAS</span>
+                        <a href="#" class="group-hover:translate-x-1 transition-transform flex items-center gap-1 font-bold">
+                            VIEW <span>&rarr;</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Project Card 4 -->
+                <article class="group halftone-card-hover border border-black/10 dark:border-white/10 rounded-2xl p-6 flex flex-col justify-between hover:border-black dark:hover:border-white transition-all duration-200 animate-fade-up stagger-4 bg-white dark:bg-trueblack">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between font-mono text-[10px] tracking-widest uppercase">
+                            <span class="text-black/50 dark:text-white/50">ARCH — 04</span>
+                            <span class="px-2 py-0.5 border border-black/10 dark:border-white/10 rounded-full">2024</span>
+                        </div>
+
+                        <!-- Halftone Texture Preview Banner -->
+                        <div class="w-full h-32 rounded-lg border border-black/10 dark:border-white/10 halftone-bg flex items-center justify-center p-4">
+                            <span class="font-pixel text-xl uppercase tracking-widest">TERMINAL.APP</span>
+                        </div>
+
+                        <h3 class="font-sans text-xl font-medium tracking-tight">Agent Command Line</h3>
+                        <p class="font-serif text-sm text-black/70 dark:text-white/70 leading-relaxed">
+                            Zero-overhead command-line interface for managing autonomous local AI execution pipelines.
+                        </p>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-black/5 dark:border-white/5 flex items-center justify-between font-mono text-[11px]">
+                        <span class="text-black/50 dark:text-white/50">GO / CLI</span>
+                        <a href="#" class="group-hover:translate-x-1 transition-transform flex items-center gap-1 font-bold">
+                            VIEW <span>&rarr;</span>
+                        </a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section id="about" class="space-y-8 pt-8">
+            <div class="border-t border-black/10 dark:border-white/10 pt-6 flex justify-between items-baseline">
+                <h2 class="font-mono text-xs tracking-widest uppercase flex items-center gap-2">
+                    <span class="font-bold">02 —</span>
+                    <span>SPECIFICATION PHILOSOPHY</span>
+                </h2>
+                <span class="font-mono text-[10px] text-black/40 dark:text-white/40 uppercase">CORE VALUES</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-sans">
+                <div class="border border-black/10 dark:border-white/10 rounded-xl p-5 space-y-2">
+                    <div class="font-mono text-[10px] text-black/50 dark:text-white/50 uppercase">RULE 01</div>
+                    <h4 class="font-medium text-sm">NO ACCENT COLOR</h4>
+                    <p class="font-serif text-xs text-black/70 dark:text-white/70 leading-relaxed">
+                        Emphasis comes from inversion, typography switching, and halftone textures rather than hue.
+                    </p>
+                </div>
+
+                <div class="border border-black/10 dark:border-white/10 rounded-xl p-5 space-y-2">
+                    <div class="font-mono text-[10px] text-black/50 dark:text-white/50 uppercase">RULE 02</div>
+                    <h4 class="font-medium text-sm">TYPE DOES THE TALKING</h4>
+                    <p class="font-serif text-xs text-black/70 dark:text-white/70 leading-relaxed">
+                        Four distinct font roles carry full hierarchy with restrained sizes and precise tracking.
+                    </p>
+                </div>
+
+                <div class="border border-black/10 dark:border-white/10 rounded-xl p-5 space-y-2">
+                    <div class="font-mono text-[10px] text-black/50 dark:text-white/50 uppercase">RULE 03</div>
+                    <h4 class="font-medium text-sm">WHITESPACE IS STRUCTURE</h4>
+                    <p class="font-serif text-xs text-black/70 dark:text-white/70 leading-relaxed">
+                        Generous vertical rhythm and hairline rules structure content without clutter.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-black/10 dark:border-white/10 py-10 mt-20 transition-colors">
+        <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4 font-mono text-xs text-black/60 dark:text-white/60">
+            <div class="flex items-center gap-2">
+                <span class="w-1.5 h-1.5 bg-black dark:bg-white rounded-full"></span>
+                <span>BRYL-MINIMAL SPECIFICATION</span>
+            </div>
+            <div class="text-[10px] tracking-widest uppercase">
+                MIT LICENSE // 2026
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeText = document.getElementById('theme-text');
+
+        // Check initial theme preference
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+            themeText.textContent = 'LIGHT';
+        } else {
+            themeText.textContent = 'DARK';
+        }
+
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            if (document.documentElement.classList.contains('dark')) {
+                themeText.textContent = 'LIGHT';
+            } else {
+                themeText.textContent = 'DARK';
+            }
+        });
+    </script>
+</body>
+</html>
