@@ -176,6 +176,33 @@
             border-radius: 9999px;
         }
 
+        /* ==========================================================================
+           Minimalist Tech Scroll-Reveal Transition
+           ========================================================================== */
+        .tech-reveal-section {
+            opacity: 0;
+            transform: translateY(22px);
+            filter: blur(2.5px);
+            transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform, filter;
+        }
+
+        .tech-reveal-section.revealed {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        /* Hamburger morph animations */
+        #mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(1) {
+            transform: translateY(3.5px) rotate(45deg);
+        }
+        #mobile-menu-btn[aria-expanded="true"] .hamburger-line:nth-child(2) {
+            transform: translateY(-3.5px) rotate(-45deg);
+        }
+
         /* Reduced motion support */
         @media (prefers-reduced-motion: reduce) {
             *, ::before, ::after {
@@ -183,6 +210,11 @@
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
                 scroll-behavior: auto !important;
+            }
+            .tech-reveal-section {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
             }
         }
     </style>
@@ -202,23 +234,75 @@
                 <span class="text-gray-400 hidden sm:inline text-[11px]">// PORTFOLIO</span>
             </a>
 
-            <!-- Navigation Links -->
-            <nav class="flex items-center gap-3 sm:gap-6 micro-label text-gray-500">
-                <a href="#about" class="hover:text-ink transition-colors hidden md:inline">01 — ABOUT</a>
-                <a href="#skills" class="hover:text-ink transition-colors hidden md:inline">02 — SKILLS</a>
+            <!-- Navigation Links (Desktop) -->
+            <nav class="hidden md:flex items-center gap-5 lg:gap-6 micro-label text-gray-500">
+                <a href="#about" class="hover:text-ink transition-colors">01 — ABOUT</a>
+                <a href="#skills" class="hover:text-ink transition-colors">02 — SKILLS</a>
                 <a href="#projects" class="hover:text-ink transition-colors">03 — PROJECTS</a>
-                <a href="#experience" class="hover:text-ink transition-colors hidden sm:inline">04 — EXP</a>
+                <a href="#experience" class="hover:text-ink transition-colors">04 — EXP</a>
+                <a href="#certifications" class="hover:text-ink transition-colors">05 — CERTS</a>
                 <a href="#contact" class="hover:text-ink transition-colors">06 — CONTACT</a>
 
-                <!-- Theme Switcher Button (Light / Dark / System) -->
+                <!-- Theme Switcher Button (Desktop) -->
                 <button id="theme-toggle-btn" 
-                        class="ml-2 px-2.5 py-1 rounded-full border border-gray-300 hover:border-ink text-gray-500 hover:text-ink transition-all flex items-center gap-1.5 micro-label bg-gray-50 hover:bg-ink hover:text-bg"
+                        class="ml-1 px-2.5 py-1 rounded-full border border-gray-300 hover:border-ink text-gray-500 hover:text-ink transition-all flex items-center gap-1.5 micro-label bg-gray-50 hover:bg-ink hover:text-bg"
                         title="Toggle theme" 
                         aria-label="Toggle Color Theme">
                     <span id="theme-icon">◐</span>
                     <span id="theme-mode-text">DARK</span>
                 </button>
             </nav>
+
+            <!-- Mobile Controls (Theme Toggle + Hamburger Icon) -->
+            <div class="flex items-center gap-2 md:hidden">
+                <!-- Theme Switcher Button (Mobile) -->
+                <button id="theme-toggle-btn-mobile" 
+                        class="px-2.5 py-1 rounded-full border border-gray-300 hover:border-ink text-gray-500 hover:text-ink transition-all flex items-center gap-1.5 micro-label bg-gray-50 hover:bg-ink hover:text-bg"
+                        title="Toggle theme" 
+                        aria-label="Toggle Color Theme">
+                    <span id="theme-icon-mobile">◐</span>
+                    <span id="theme-mode-text-mobile" class="text-[9px]">DARK</span>
+                </button>
+
+                <!-- Hamburger Button with Line Icons -->
+                <button id="mobile-menu-btn" 
+                        class="w-9 h-9 rounded-lg border border-gray-300 hover:border-ink flex flex-col items-center justify-center gap-1.5 text-ink transition-colors p-2"
+                        aria-label="Toggle Navigation Menu"
+                        aria-expanded="false">
+                    <span class="hamburger-line w-4 h-[1.5px] bg-ink transition-all duration-300 ease-out origin-center"></span>
+                    <span class="hamburger-line w-4 h-[1.5px] bg-ink transition-all duration-300 ease-out origin-center"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Navigation Drawer -->
+        <div id="mobile-nav-drawer" 
+             class="hidden md:hidden border-t border-gray-200 bg-bg/95 backdrop-blur-xl px-4 py-4 space-y-1 shadow-bryl-modal transition-all duration-300">
+            <div class="micro-label text-gray-400 px-2 py-1 text-[9px]">MENU DIRECTORY //</div>
+            <a href="#about" class="mobile-nav-link block px-3 py-2.5 rounded-lg hover:bg-gray-100 text-ink micro-label flex items-center justify-between transition-colors">
+                <span>01 — ABOUT & EDUCATION</span>
+                <span class="text-gray-400 text-xs">&rarr;</span>
+            </a>
+            <a href="#skills" class="mobile-nav-link block px-3 py-2.5 rounded-lg hover:bg-gray-100 text-ink micro-label flex items-center justify-between transition-colors">
+                <span>02 — SKILLS & STACK</span>
+                <span class="text-gray-400 text-xs">&rarr;</span>
+            </a>
+            <a href="#projects" class="mobile-nav-link block px-3 py-2.5 rounded-lg hover:bg-gray-100 text-ink micro-label flex items-center justify-between transition-colors">
+                <span>03 — FEATURED PROJECTS</span>
+                <span class="text-gray-400 text-xs">&rarr;</span>
+            </a>
+            <a href="#experience" class="mobile-nav-link block px-3 py-2.5 rounded-lg hover:bg-gray-100 text-ink micro-label flex items-center justify-between transition-colors">
+                <span>04 — WORK EXPERIENCE</span>
+                <span class="text-gray-400 text-xs">&rarr;</span>
+            </a>
+            <a href="#certifications" class="mobile-nav-link block px-3 py-2.5 rounded-lg hover:bg-gray-100 text-ink micro-label flex items-center justify-between transition-colors">
+                <span>05 — CERTIFICATIONS</span>
+                <span class="text-gray-400 text-xs">&rarr;</span>
+            </a>
+            <a href="#contact" class="mobile-nav-link block px-3 py-2.5 rounded-lg hover:bg-gray-100 text-ink micro-label flex items-center justify-between transition-colors">
+                <span>06 — CONTACT & CONNECT</span>
+                <span class="text-gray-400 text-xs">&rarr;</span>
+            </a>
         </div>
     </header>
 
@@ -233,7 +317,7 @@
         <!-- ======================================================================
              HERO SECTION: Name, Title, Avatar Placeholder & Status
              ====================================================================== -->
-        <section id="hero" class="space-y-8 pt-4">
+        <section id="hero" class="tech-reveal-section space-y-8 pt-4">
             
             <!-- Top Status Pill & Location -->
             <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gray-200 pb-4">
@@ -325,7 +409,7 @@
         <!-- ======================================================================
              SECTION 01: ABOUT & EDUCATION
              ====================================================================== -->
-        <section id="about" class="space-y-6 pt-6">
+        <section id="about" class="tech-reveal-section space-y-6 pt-6">
             
             <!-- Section Header (Numbered em-dash style) -->
             <div class="border-b border-gray-200 pb-3 flex items-baseline justify-between">
@@ -403,8 +487,8 @@
                     </div>
                 </div>
 
-                <!-- Leadership & Extracurriculars -->
-                <div class="p-5 rounded-2xl border border-gray-200 bg-gray-50/50 space-y-3">
+                <!-- Leadership & Extracurriculars (Hoverable bryl-card) -->
+                <div class="bryl-card p-5 sm:p-6 space-y-3 bg-gray-50/50">
                     <div class="micro-label text-gray-400">ORGANIZATIONAL AFFILIATION & LEADERSHIP</div>
                     <div class="flex items-start justify-between">
                         <div>
@@ -427,7 +511,7 @@
         <!-- ======================================================================
              SECTION 02: SKILLS & TECHNICAL STACK
              ====================================================================== -->
-        <section id="skills" class="space-y-6 pt-6">
+        <section id="skills" class="tech-reveal-section space-y-6 pt-6">
             
             <!-- Section Header -->
             <div class="border-b border-gray-200 pb-3 flex items-baseline justify-between">
@@ -511,7 +595,7 @@
         <!-- ======================================================================
              SECTION 03: FEATURED PROJECTS
              ====================================================================== -->
-        <section id="projects" class="space-y-6 pt-6">
+        <section id="projects" class="tech-reveal-section space-y-6 pt-6">
             
             <!-- Section Header -->
             <div class="border-b border-gray-200 pb-3 flex items-baseline justify-between">
@@ -742,7 +826,7 @@
         <!-- ======================================================================
              SECTION 04: WORK EXPERIENCE
              ====================================================================== -->
-        <section id="experience" class="space-y-6 pt-6">
+        <section id="experience" class="tech-reveal-section space-y-6 pt-6">
             
             <!-- Section Header -->
             <div class="border-b border-gray-200 pb-3 flex items-baseline justify-between">
@@ -852,7 +936,7 @@
         <!-- ======================================================================
              SECTION 05: CERTIFICATIONS & CREDENTIALS (Template Section)
              ====================================================================== -->
-        <section id="certifications" class="space-y-6 pt-6">
+        <section id="certifications" class="tech-reveal-section space-y-6 pt-6">
             
             <!-- Section Header -->
             <div class="border-b border-gray-200 pb-3 flex items-baseline justify-between">
@@ -937,7 +1021,7 @@
         <!-- ======================================================================
              SECTION 06: CONTACT & GET IN TOUCH
              ====================================================================== -->
-        <section id="contact" class="space-y-6 pt-6">
+        <section id="contact" class="tech-reveal-section space-y-6 pt-6">
             
             <!-- Section Header -->
             <div class="border-b border-gray-200 pb-3 flex items-baseline justify-between">
@@ -1052,14 +1136,14 @@
                 <span>OLIVER NAVAL // PORTFOLIO 2026</span>
             </div>
             <div class="micro-label text-gray-400">
-                BRYL-MINIMAL SPEC // GEIST MONO
+                Web Development Midterm Project
             </div>
         </div>
     </footer>
 
 
     <!-- ==========================================================================
-         INTERACTIVE JAVASCRIPT: Theme Switcher & Clipboard Helper
+         INTERACTIVE JAVASCRIPT: Theme Switcher, Mobile Nav & Tech Reveal
          ========================================================================== -->
     <script>
         // ----------------------------------------------------------------------
@@ -1069,15 +1153,23 @@
         const themeModeText = document.getElementById('theme-mode-text');
         const themeIcon = document.getElementById('theme-icon');
 
+        const themeToggleBtnMobile = document.getElementById('theme-toggle-btn-mobile');
+        const themeModeTextMobile = document.getElementById('theme-mode-text-mobile');
+        const themeIconMobile = document.getElementById('theme-icon-mobile');
+
         function applyTheme(isDark) {
             if (isDark) {
                 document.documentElement.classList.add('dark');
-                themeModeText.textContent = 'LIGHT';
-                themeIcon.textContent = '☼';
+                if (themeModeText) themeModeText.textContent = 'LIGHT';
+                if (themeIcon) themeIcon.textContent = '☼';
+                if (themeModeTextMobile) themeModeTextMobile.textContent = 'LIGHT';
+                if (themeIconMobile) themeIconMobile.textContent = '☼';
             } else {
                 document.documentElement.classList.remove('dark');
-                themeModeText.textContent = 'DARK';
-                themeIcon.textContent = '☾';
+                if (themeModeText) themeModeText.textContent = 'DARK';
+                if (themeIcon) themeIcon.textContent = '☾';
+                if (themeModeTextMobile) themeModeTextMobile.textContent = 'DARK';
+                if (themeIconMobile) themeIconMobile.textContent = '☾';
             }
         }
 
@@ -1089,13 +1181,15 @@
             applyTheme(false);
         }
 
-        // Listen for user click on toggle
-        themeToggleBtn.addEventListener('click', () => {
+        function toggleTheme() {
             const isCurrentlyDark = document.documentElement.classList.contains('dark');
             const newIsDark = !isCurrentlyDark;
             applyTheme(newIsDark);
             localStorage.setItem('bryl-theme', newIsDark ? 'dark' : 'light');
-        });
+        }
+
+        if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
+        if (themeToggleBtnMobile) themeToggleBtnMobile.addEventListener('click', toggleTheme);
 
         // Listen for OS system theme changes
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
@@ -1105,7 +1199,91 @@
         });
 
         // ----------------------------------------------------------------------
-        // 2. Clipboard Helper Function
+        // 2. Mobile Hamburger Navigation Drawer
+        // ----------------------------------------------------------------------
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileNavDrawer = document.getElementById('mobile-nav-drawer');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function closeMobileMenu() {
+            if (mobileNavDrawer && mobileMenuBtn) {
+                mobileNavDrawer.classList.add('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        function openMobileMenu() {
+            if (mobileNavDrawer && mobileMenuBtn) {
+                mobileNavDrawer.classList.remove('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        if (mobileMenuBtn && mobileNavDrawer) {
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isExpanded = mobileMenuBtn.getAttribute('aria-expanded') === 'true';
+                if (isExpanded) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+            });
+
+            // Close menu when a link inside is clicked
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    closeMobileMenu();
+                });
+            });
+
+            // Close menu on click outside
+            document.addEventListener('click', (e) => {
+                if (!mobileNavDrawer.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    closeMobileMenu();
+                }
+            });
+
+            // Close on Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeMobileMenu();
+                }
+            });
+        }
+
+        // ----------------------------------------------------------------------
+        // 3. Minimalist Tech Scroll-Reveal Transition
+        // ----------------------------------------------------------------------
+        const revealSections = document.querySelectorAll('.tech-reveal-section');
+
+        if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            revealSections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.88) {
+                    section.classList.add('revealed');
+                } else {
+                    sectionObserver.observe(section);
+                }
+            });
+        } else {
+            revealSections.forEach(s => s.classList.add('revealed'));
+        }
+
+        // ----------------------------------------------------------------------
+        // 4. Clipboard Helper Function
         // ----------------------------------------------------------------------
         function copyToClipboard(text, buttonElement) {
             navigator.clipboard.writeText(text).then(() => {
